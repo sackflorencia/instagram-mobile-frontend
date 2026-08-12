@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { View } from "react-native";
+import PostsList from "../../components/PostList/PostList";
 import type { Post } from "../../interfaces/Post";
-import { getCharacters } from "../../services/hpAPI";
 import { characterToPost } from "../../mappers/characterMapper";
-import PostsList from "../../components/PostsList";
-import type { Profile } from "../../interfaces/Profile";
-import { houseToProfile } from "../../mappers/houseMapper";
-import { HOUSES } from "../../constants/houses";
-import './FeedPage.css';
+import { getCharacters } from "../../services/hpAPI";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 const FeedPage = () => {
@@ -30,9 +27,9 @@ const FeedPage = () => {
   }, []);
 
   return (
-    <View>
+    <SafeAreaView>
       <PostsList posts={posts} />
-    </View>
+    </SafeAreaView>
   )
 }
 

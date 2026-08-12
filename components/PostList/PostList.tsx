@@ -1,6 +1,6 @@
 import { FlatList } from "react-native";
-import type { Post } from "../interfaces/Post";
-import PostCard from "./PostCard/PostCard";
+import type { Post } from "../../interfaces/Post";
+import PostCard from "../PostCard/PostCard";
 
 interface PostsListProps {
     posts: Post[];
