@@ -3,7 +3,6 @@
 import { View } from "react-native";
 import type { Comment } from "../../../interfaces/Comment";
 import CommentItem from "./CommentItem/CommentItem";
-import "./CommentsList.css";
 
 const CommentsList = ({comments}: {comments: Comment[]}) => {
     return (

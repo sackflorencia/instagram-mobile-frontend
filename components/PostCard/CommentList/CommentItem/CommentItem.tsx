@@ -5,11 +5,11 @@ import type { Comment } from "../../../../interfaces/Comment";
 
 const CommentItem = ({ comment }: { comment: Comment }) => {
     return (
-        <View className="comment-item-container">
+        <View>
             {/* <Link to={`/profile/${comment.profileId}`} className="comment-item-user"> */}
                 <Text>{comment.username}</Text>
             {/* </Link> */}
-            <Text className="comment-item-text">{comment.text}</Text>
+            <Text >{comment.text}</Text>
         </View>
     )
 }
