@@ -10,7 +10,7 @@ const ProfileHeader = ({profile, isOwnProfile}: {profile: Profile; isOwnProfile:
         <View>
             <View>
                 <Image 
-                    source={{uri: profile.avatar}} 
+                    source={profile.avatar} 
                     alt={`${profile.name}'s avatar`} 
                 />
             </View>

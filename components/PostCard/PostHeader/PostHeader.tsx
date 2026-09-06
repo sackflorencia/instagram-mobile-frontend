@@ -2,8 +2,9 @@ import React from "react";
 import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import type { ImageSourcePropType } from "react-native";
 
-const PostHeader = ({ username, profileId, avatar }: { username: string, profileId: string, avatar: string }) => {
+const PostHeader = ({ username, profileId, avatar }: { username: string, profileId: string, avatar: ImageSourcePropType }) => {
     const router = useRouter();
     const initial = username ? username.charAt(0).toUpperCase() : "?";
 
@@ -25,7 +26,7 @@ const PostHeader = ({ username, profileId, avatar }: { username: string, profile
                 <View style={styles.avatarContainer}>
                     {avatar ? (
                         <Image
-                            source={{ uri: avatar }}
+                            source={avatar }
                             style={styles.avatar}
                             accessibilityLabel={username}
                         />

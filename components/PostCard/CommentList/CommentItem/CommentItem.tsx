@@ -3,19 +3,35 @@ import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 
 import type { Comment } from "../../../../interfaces/Comment";
+import { houseToProfile } from "../../../../mappers/houseMapper";
 
 const CommentItem = ({ comment }: { comment: Comment }) => {
-    const avatarUrl = (comment as any)?.avatarUrl;
-    const initial = comment.username ? comment.username.charAt(0).toUpperCase() : "?";
+    const profile = houseToProfile(comment.profileId, 0);
+    const avatar = profile.avatar;
+
+    const initial = comment.username
+        ? comment.username.charAt(0).toUpperCase()
+        : "?";
+
     const router = useRouter();
+
     return (
         <View style={styles.container}>
-            <TouchableOpacity activeOpacity={0.8} style={styles.avatarContainer}>
-                {avatarUrl ? (
-                    <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+            <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.avatarContainer}
+            >
+                {avatar ? (
+                    <Image
+                        source={avatar}
+                        style={styles.avatar}
+                        accessibilityLabel={comment.username}
+                    />
                 ) : (
                     <View style={styles.avatarPlaceholder}>
-                        <Text style={styles.avatarInitial}>{initial}</Text>
+                        <Text style={styles.avatarInitial}>
+                            {initial}
+                        </Text>
                     </View>
                 )}
             </TouchableOpacity>
@@ -35,13 +51,15 @@ const CommentItem = ({ comment }: { comment: Comment }) => {
                     >
                         {comment.username}
                     </Text>
+
                     {"  "}
+
                     {comment.text}
                 </Text>
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
