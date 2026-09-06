@@ -12,7 +12,6 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
       }}>
@@ -25,9 +24,16 @@ export default function TabLayout() {
       />
       <Tabs.Screen
         name="profile"
+        initialParams={{ house: "me" }}
         options={{
-          title: 'Profile',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Profile",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol
+              size={28}
+              name="paperplane.fill"
+              color={color}
+            />
+          ),
         }}
       />
     </Tabs>

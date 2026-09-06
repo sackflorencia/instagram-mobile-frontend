@@ -21,7 +21,7 @@ const ProfileHeader = ({profile, isOwnProfile}: {profile: Profile; isOwnProfile:
                     <Text>{profile.name}</Text>
                     <View >
                         {isOwnProfile ? (
-                            <Pressable>Edit Profile</Pressable>
+                            <Text>Edit Profile</Text>
                         ) : (
                             <FollowButton profileId={profile.id} />
                         )}

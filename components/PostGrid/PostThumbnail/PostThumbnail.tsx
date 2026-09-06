@@ -1,27 +1,29 @@
-// import { Link } from "react-router-dom";
-// ===== IA: INICIO =====
-// IA: Se agregan React, useState, TouchableOpacity, Image, View, ActivityIndicator y StyleSheet para maquetar la miniatura táctil tipo grilla de perfil.
 import React, { useState } from "react";
-import { Image, TouchableOpacity, StyleSheet, View, ActivityIndicator } from "react-native";
-// ===== IA: FIN =====
+import {
+    Image,
+    TouchableOpacity,
+    StyleSheet,
+    View,
+    ActivityIndicator,
+} from "react-native";
+import { useRouter } from "expo-router";
 import type { Post } from "../../../interfaces/Post";
 
-//chatgpt: me explico que tenia que pasar el state post a la postpage y lo agregue
 const PostThumbnail = ({ post }: { post: Post }) => {
-    // ===== IA: INICIO =====
-    // IA: Estado local para mostrar un spinner/placeholder neutro mientras se descarga la imagen.
     const [isLoading, setIsLoading] = useState(true);
-    // ===== IA: FIN =====
+    const router = useRouter();
 
     return (
-        // ===== IA: INICIO =====
-        // IA: Rediseño en contenedor táctil con relación de aspecto 1:1 y respuesta al toque, ideal para grillas de 3 columnas estilo Instagram.
         <TouchableOpacity
             activeOpacity={0.8}
             style={styles.container}
             onPress={() => {
-                // Listo para conectar la navegación al detalle del post:
-                // e.g. navigation.navigate('PostDetail', { post })
+                router.push({
+                    pathname: "/post/[postId]",
+                    params: {
+                        postId: post.id.toString(),
+                    },
+                });
             }}
         >
             {isLoading && (
@@ -39,12 +41,9 @@ const PostThumbnail = ({ post }: { post: Post }) => {
                 onLoadEnd={() => setIsLoading(false)}
             />
         </TouchableOpacity>
-        // ===== IA: FIN =====
     );
 };
 
-// ===== IA: INICIO =====
-// IA: Hoja de estilos con relación de aspecto cuadrada (1:1) y fondo neutro reutilizado del proyecto.
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -58,13 +57,12 @@ const styles = StyleSheet.create({
         height: "100%",
     },
     loadingContainer: {
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFill,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#EFEFEF",
         zIndex: 1,
     },
 });
-// ===== IA: FIN =====
 
 export default PostThumbnail;
