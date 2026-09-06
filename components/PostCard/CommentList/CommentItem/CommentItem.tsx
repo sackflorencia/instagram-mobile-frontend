@@ -1,24 +1,15 @@
-// import { Link } from "react-router-dom";
-// ===== IA: INICIO =====
-// IA: Se agregan componentes nativos de React Native (StyleSheet, Image, TouchableOpacity) para dar estructura visual estilo Instagram.
 import React from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-// ===== IA: FIN =====
+import { useRouter } from "expo-router";
+
 import type { Comment } from "../../../../interfaces/Comment";
 
 const CommentItem = ({ comment }: { comment: Comment }) => {
-    // ===== IA: INICIO =====
-    // IA: Extracción segura de avatarUrl si estuviera presente en la interfaz Comment,
-    // y generación de inicial como fallback visual.
     const avatarUrl = (comment as any)?.avatarUrl;
     const initial = comment.username ? comment.username.charAt(0).toUpperCase() : "?";
-    // ===== IA: FIN =====
-
+    const router = useRouter();
     return (
-        // ===== IA: INICIO =====
-        // IA: Rediseño del contenedor principal con fila flexible, avatar a la izquierda y texto fluido a la derecha.
         <View style={styles.container}>
-            {/* Avatar o Avatar Placeholder */}
             <TouchableOpacity activeOpacity={0.8} style={styles.avatarContainer}>
                 {avatarUrl ? (
                     <Image source={{ uri: avatarUrl }} style={styles.avatar} />
@@ -29,13 +20,17 @@ const CommentItem = ({ comment }: { comment: Comment }) => {
                 )}
             </TouchableOpacity>
 
-            {/* Bloque de texto con el nombre de usuario integrado en línea */}
             <View style={styles.contentContainer}>
                 <Text style={styles.commentText}>
-                    <Text 
+                    <Text
                         style={styles.username}
                         onPress={() => {
-                            // Listo para conectar navegación al perfil: e.g. navigation.navigate('Profile', { profileId: comment.profileId })
+                            router.push({
+                                pathname: "/profile",
+                                params: {
+                                    house: comment.profileId,
+                                },
+                            });
                         }}
                     >
                         {comment.username}
@@ -45,12 +40,9 @@ const CommentItem = ({ comment }: { comment: Comment }) => {
                 </Text>
             </View>
         </View>
-        // ===== IA: FIN =====
     )
 }
 
-// ===== IA: INICIO =====
-// IA: Hoja de estilos con tipografía, márgenes y paleta de colores idéntica a Instagram y coherente con el componente Loading.
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
@@ -83,7 +75,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        paddingTop: 2, // Alineación fina con la parte superior del avatar
+        paddingTop: 2,
     },
     commentText: {
         fontSize: 13,
@@ -95,6 +87,5 @@ const styles = StyleSheet.create({
         color: "#262626",
     },
 });
-// ===== IA: FIN =====
 
 export default CommentItem;

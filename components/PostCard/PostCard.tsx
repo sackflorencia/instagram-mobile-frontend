@@ -3,7 +3,7 @@ import PostHeader from "./PostHeader/PostHeader";
 import PostImage from "./PostImage/PostImage";
 import PostActions from "./PostActions/PostActions";
 import PostDescription from "./PostDescription/PostDescription";
-//import CommentsList from "./CommentsList/CommentsList";
+import CommentsList from "./CommentList/CommentList";
 import { View } from "react-native";
 
 interface PostCardProps {
@@ -17,50 +17,55 @@ const PostCard = ({ post, variant }: PostCardProps) => {
     if (variant === "detail") {
         return (
             <View>
+
+
                 <View>
-                    <PostImage image= { post.image } />
+                    <PostHeader
+                        username={post.username}
+                        profileId={post.profileId}
+                        avatar={post.avatar}
+                    />
                 </View>
 
-    <View>
-        <PostHeader
-            username={post.username}
-            profileId={post.profileId}
-            avatar={post.avatar}
-        />
-    </View>
+                <View>
+                    <PostImage image={post.image} />
+                </View>
 
-    <View>
-        <PostDescription post={post} variant={variant} />
-        {/* <CommentsList comments={post.comments} /> */}
-    </View>
+                <View>
+                    <PostActions postId={post.id} likes={post.likes} />
+                </View>
 
-    <View>
-        <PostActions postId={post.id} likes={post.likes} />
-    </View>
-</View>
+                <View>
+                    <PostDescription post={post} variant={variant} />
+                </View>
+
+                <View>
+                    <CommentsList comments={post.comments} /> 
+                </View>
+            </View>
         );
     }
-return (
-    <View>
-        <PostHeader
-            username={post.username}
-            profileId={post.profileId}
-            avatar={post.avatar}
-        />
+    return (
+        <View>
+            <PostHeader
+                username={post.username}
+                profileId={post.profileId}
+                avatar={post.avatar}
+            />
 
-        <PostImage image={post.image} />
+            <PostImage image={post.image} />
 
-        <PostActions
-            postId={post.id}
-            likes={post.likes}
-        />
+            <PostActions
+                postId={post.id}
+                likes={post.likes}
+            />
 
-        <PostDescription
-            post={post}
-            variant={variant}
-        />
-    </View>
-);
+            <PostDescription
+                post={post}
+                variant={variant}
+            />
+        </View>
+    );
 }
 
 export default PostCard;

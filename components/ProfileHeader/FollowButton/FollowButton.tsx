@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pressable } from "react-native";
+import { Pressable, Text } from "react-native";
 
 const FollowButton = ({ profileId,
 }: {
@@ -31,7 +31,10 @@ const FollowButton = ({ profileId,
         <Pressable
             onPress={handleClick}
         >
+            <Text>
+
             {isFollowing ? "Following" : "Follow"}
+            </Text>
         </Pressable>
     );
 };
