@@ -22,7 +22,7 @@ export const generateComments = (
         comments.push({
             id: `${postId}-${i}`,
             profileId: house.id,
-            username: house.name,
+            username: house.id,
             text,
         });
     }

@@ -17,6 +17,7 @@ const CommentItem = ({ comment }: { comment: Comment }) => {
 
     return (
         <View style={styles.container}>
+            {/* Imagen de perfil a la izquierda */}
             <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.avatarContainer}
@@ -36,24 +37,23 @@ const CommentItem = ({ comment }: { comment: Comment }) => {
                 )}
             </TouchableOpacity>
 
+            {/* Contenido a la derecha: Username arriba, comentario abajo */}
             <View style={styles.contentContainer}>
+                <Text 
+                    style={styles.username}
+                    onPress={() => {
+                        router.push({
+                            pathname: "/profile",
+                            params: {
+                                house: comment.profileId,
+                            },
+                        });
+                    }}
+                >
+                    {comment.username}
+                </Text>
+
                 <Text style={styles.commentText}>
-                    <Text
-                        style={styles.username}
-                        onPress={() => {
-                            router.push({
-                                pathname: "/profile",
-                                params: {
-                                    house: comment.profileId,
-                                },
-                            });
-                        }}
-                    >
-                        {comment.username}
-                    </Text>
-
-                    {"  "}
-
                     {comment.text}
                 </Text>
             </View>
@@ -95,13 +95,15 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 2,
     },
+    username: {
+        fontWeight: "600",
+        fontSize: 13,
+        color: "#262626",
+        marginBottom: 2, // Espacio pequeño entre el usuario y el comentario
+    },
     commentText: {
         fontSize: 13,
         lineHeight: 18,
-        color: "#262626",
-    },
-    username: {
-        fontWeight: "600",
         color: "#262626",
     },
 });
