@@ -10,8 +10,7 @@ import PostGrid from "../../components/PostGrid/PostGrid";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import Loading from "../../components/Loading/Loading";
 import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ProfileScreen = () => {
     const { house } = useLocalSearchParams<{ house: string }>();
@@ -19,6 +18,7 @@ const ProfileScreen = () => {
     const realHouse = isOwnProfile ? MY_HOUSE : house ?? "";
     const [posts, setPosts] = useState<Post[]>([]);
     const [profile, setProfile] = useState<Profile | null>(null);
+    const insets = useSafeAreaInsets();
     useEffect(() => {
         async function loadProfile() {
             const characters =
@@ -46,13 +46,19 @@ const ProfileScreen = () => {
     }
 
     return (
-        <SafeAreaView>
-            <View>
-                <ProfileHeader profile={profile} isOwnProfile={isOwnProfile} />
-                <View/>
-                <PostGrid posts={posts} />
-            </View>
-        </SafeAreaView>
+        <View
+            style={{
+                flex: 1,
+                paddingTop: insets.top,
+            }}
+        >
+            <ProfileHeader
+                profile={profile}
+                isOwnProfile={isOwnProfile}
+            />
+
+            <PostGrid posts={posts} />
+        </View>
     )
 }
 

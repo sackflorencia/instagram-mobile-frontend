@@ -18,6 +18,11 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#000',
         tabBarInactiveTintColor: '#8e8e8e',
+
+        tabBarStyle: {
+          backgroundColor: '#fff',
+          borderTopWidth: 0,
+        },
       }}
     >
       <Tabs.Screen
