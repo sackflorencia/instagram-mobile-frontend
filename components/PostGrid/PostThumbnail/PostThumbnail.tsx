@@ -37,8 +37,22 @@ const PostThumbnail = ({ post }: { post: Post }) => {
                 style={styles.image}
                 resizeMode="cover"
                 accessibilityLabel="Post thumbnail"
-                onLoadStart={() => setIsLoading(true)}
-                onLoadEnd={() => setIsLoading(false)}
+                onLoadStart={() => {
+                    console.log("IMAGE LOAD START:", post.image);
+                    setIsLoading(true);
+                }}
+                onLoad={() => {
+                    console.log("IMAGE LOAD SUCCESS:", post.image);
+                    setIsLoading(false);
+                }}
+                onError={(error) => {
+                    console.log("IMAGE LOAD ERROR:", post.image, error.nativeEvent);
+                    setIsLoading(false);
+                }}
+                onLoadEnd={() => {
+                    console.log("IMAGE LOAD END:", post.image);
+                    setIsLoading(false);
+                }}
             />
         </TouchableOpacity>
     );
