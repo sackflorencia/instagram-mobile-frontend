@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import { View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useCallback, useState } from "react";
+import { useFocusEffect } from "expo-router";
 import PostsList from "../../components/PostList/PostList";
 import type { Post } from "../../interfaces/Post";
 import { characterToPost } from "../../mappers/characterMapper";
@@ -9,25 +8,26 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const FeedPage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const { refresh } = useLocalSearchParams<{ refresh?: string }>();
 
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        const characters = await getCharacters();
+  useFocusEffect(
+    useCallback(() => {
+      async function loadPosts() {
+        try {
+          const characters = await getCharacters();
 
-        const posts = characters
-          .filter(character => character.house && character.image)
-          .map(characterToPost);
+          const posts = characters
+            .filter(character => character.house && character.image)
+            .map(characterToPost);
 
-        setPosts(posts);
-      } catch (error) {
-        console.error(error);
+          setPosts(posts);
+        } catch (error) {
+          console.error(error);
+        }
       }
-    }
 
-    loadPosts();
-  }, [refresh]);
+      loadPosts();
+    }, [])
+  );
 
   return (
     <SafeAreaView>

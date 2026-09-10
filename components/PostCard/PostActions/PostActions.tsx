@@ -1,32 +1,27 @@
-// ===== IA: INICIO =====
-// IA: Se agregan React y StyleSheet para manejar la interfaz estilizada nativa.
 import React, { useEffect, useState } from "react";
 import { Text, View, Pressable, StyleSheet } from "react-native";
 import { FontAwesome, Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// ===== IA: FIN =====
-
-//el codigo fue hecho con ia pero le indicamos que utilizaa localStorage para
-//guardar el estado de los likes y guardados
-//tambien le agregue los iconos de react-icons para los botones buscando en las documentacion de react-icons
-//https://react-icons.github.io/react-icons/icons/fa/
-//https://react-icons.github.io/react-icons/icons/fi/
+import { useFocusEffect } from "expo-router";
+import { useCallback } from "react";
 
 const PostActions = ({ postId, likes }: { postId: string, likes: number }) => {
     const [liked, setLiked] = useState(false);
     const [saved, setSaved] = useState(false);
 
-    useEffect(() => {
-        const loadState = async () => {
-            const likedValue = await AsyncStorage.getItem(`liked-${postId}`);
-            const savedValue = await AsyncStorage.getItem(`saved-${postId}`);
+    useFocusEffect(
+        useCallback(() => {
+            const loadState = async () => {
+                const likedValue = await AsyncStorage.getItem(`liked-${postId}`);
+                const savedValue = await AsyncStorage.getItem(`saved-${postId}`);
 
-            setLiked(likedValue === "true");
-            setSaved(savedValue === "true");
-        };
+                setLiked(likedValue === "true");
+                setSaved(savedValue === "true");
+            };
 
-        loadState();
-    }, [postId]);
+            loadState();
+        }, [postId])
+    );
 
     const toggleLike = async () => {
         const newValue = !liked;
@@ -60,9 +55,9 @@ const PostActions = ({ postId, likes }: { postId: string, likes: number }) => {
             <View style={styles.actionsRow}>
                 {/* Grupo de acciones izquierdas: Like, Comentario, Compartir */}
                 <View style={styles.leftActions}>
-                    <Pressable 
-                        onPress={toggleLike} 
-                        hitSlop={8} 
+                    <Pressable
+                        onPress={toggleLike}
+                        hitSlop={8}
                         style={styles.iconButton}
                     >
                         {liked ? (
@@ -72,15 +67,15 @@ const PostActions = ({ postId, likes }: { postId: string, likes: number }) => {
                         )}
                     </Pressable>
 
-                    <Pressable 
-                        hitSlop={8} 
+                    <Pressable
+                        hitSlop={8}
                         style={styles.iconButton}
                     >
                         <FontAwesome name="comment-o" size={23} color="#262626" />
                     </Pressable>
 
-                    <Pressable 
-                        hitSlop={8} 
+                    <Pressable
+                        hitSlop={8}
                         style={styles.iconButton}
                     >
                         <Feather name="send" size={22} color="#262626" />
@@ -88,8 +83,8 @@ const PostActions = ({ postId, likes }: { postId: string, likes: number }) => {
                 </View>
 
                 {/* Acción derecha: Guardar */}
-                <Pressable 
-                    onPress={toggleSave} 
+                <Pressable
+                    onPress={toggleSave}
                     hitSlop={8}
                 >
                     {saved ? (
