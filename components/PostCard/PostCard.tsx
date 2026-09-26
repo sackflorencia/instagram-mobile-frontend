@@ -5,7 +5,6 @@ import PostActions from "./PostActions/PostActions";
 import PostDescription from "./PostDescription/PostDescription";
 
 import { Text, View } from "react-native";
-import CommentsList from "./CommentList/CommentList";
 
 interface PostCardProps {
     post: Post;
@@ -18,33 +17,17 @@ const PostCard = ({ post, variant }: PostCardProps) => {
     if (variant === "detail") {
         return (
             <View>
+                <PostImage image={post.image} />
 
+                <PostActions
+                    postId={post.id}
+                    likes={post.likes}
+                />
 
-                <View>
-                    <PostHeader
-                        username={post.username}
-                        profileId={post.profileId}
-                        avatar={post.avatar}
-                    />
-                </View>
-
-                <View>
-                    <PostImage image={post.image} />
-                </View>
-
-                <View>
-                    <PostActions postId={post.id} likes={post.likes} />
-                </View>
-                
-
-                <View>
-                    <PostDescription post={post} variant={variant} />
-                </View>
-                
-                    <CommentsList comments={post.comments} /> 
-                    <Text>Hola</Text>
-
-                
+                <PostDescription
+                    post={post}
+                    variant={variant}
+                />
             </View>
         );
     }
@@ -67,9 +50,6 @@ const PostCard = ({ post, variant }: PostCardProps) => {
                 post={post}
                 variant={variant}
             />
-            <View>
-                    <CommentsList comments={post.comments} /> 
-                </View>
         </View>
     );
 }

@@ -5,7 +5,7 @@ import type { Post } from "../../interfaces/Post";
 import { characterToPost } from "../../mappers/characterMapper";
 import { getCharacters } from "../../services/hpAPI";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const FeedPage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -37,7 +37,6 @@ const FeedPage = () => {
     paddingTop: insets.top,
   }}
 >
-
       <PostsList posts={posts} />
     </View>
   );

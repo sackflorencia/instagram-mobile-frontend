@@ -6,6 +6,8 @@ export const COMMENT_TEXTS = [
   "Fantastic!",
   "Locked in",
   "Fire",
+  "🔥🔥🔥🔥",
+  "😍😍😍😍😍",
   "Incredible!",
   "Wow!",
   "Stunning!",

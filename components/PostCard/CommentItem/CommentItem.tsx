@@ -1,9 +1,8 @@
-import React from "react";
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import type { Comment } from "../../../../interfaces/Comment";
-import { houseToProfile } from "../../../../mappers/houseMapper";
+import type { Comment } from "../../../interfaces/Comment";
+import { houseToProfile } from "../../../mappers/houseMapper";
 
 const CommentItem = ({ comment }: { comment: Comment }) => {
     const profile = houseToProfile(comment.profileId, 0);

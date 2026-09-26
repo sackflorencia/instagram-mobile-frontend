@@ -1,23 +1,23 @@
-// ===== IA: INICIO =====
-// IA: Se agregan React, useState, ActivityIndicator y StyleSheet para controlar el renderizado y la carga progresiva de la imagen.
 import React, { useState } from "react";
-import { Image, View, StyleSheet, ActivityIndicator } from "react-native";
-// ===== IA: FIN =====
+import {
+    Image,
+    View,
+    StyleSheet,
+    ActivityIndicator,
+} from "react-native";
 
 const PostImage = ({ image }: { image: string }) => {
-    // ===== IA: INICIO =====
-    // IA: Estados locales para ofrecer feedback visual durante la carga o en caso de error.
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
-    // ===== IA: FIN =====
 
     return (
-        // ===== IA: INICIO =====
-        // IA: Rediseño del contenedor con un skeleton de carga atenuado y ajuste de imagen de borde a borde.
         <View style={styles.container}>
             {isLoading && (
                 <View style={styles.loadingContainer}>
-                    <ActivityIndicator size="small" color="#8E8E8E" />
+                    <ActivityIndicator
+                        size="small"
+                        color="#8E8E8E"
+                    />
                 </View>
             )}
 
@@ -25,8 +25,7 @@ const PostImage = ({ image }: { image: string }) => {
                 source={{ uri: image }}
                 style={styles.image}
                 resizeMode="cover"
-                onLoadStart={() => setIsLoading(true)}
-                onLoadEnd={() => setIsLoading(false)}
+                onLoad={() => setIsLoading(false)}
                 onError={() => {
                     setIsLoading(false);
                     setHasError(true);
@@ -39,12 +38,9 @@ const PostImage = ({ image }: { image: string }) => {
                 </View>
             )}
         </View>
-        // ===== IA: FIN =====
     );
 };
 
-// ===== IA: INICIO =====
-// IA: Hoja de estilos con formato bordes a borde (1:1 aspect ratio) e integración de paleta gris neutra.
 const styles = StyleSheet.create({
     container: {
         width: "100%",
@@ -78,6 +74,5 @@ const styles = StyleSheet.create({
         backgroundColor: "#DBDBDB",
     },
 });
-// ===== IA: FIN =====
 
 export default PostImage;
