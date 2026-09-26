@@ -28,7 +28,10 @@ const PostThumbnail = ({ post }: { post: Post }) => {
         >
             {isLoading && (
                 <View style={styles.loadingContainer}>
-                    <ActivityIndicator size="small" color="#8E8E8E" />
+                    <ActivityIndicator
+                        size="small"
+                        color="#8E8E8E"
+                    />
                 </View>
             )}
 
@@ -37,22 +40,7 @@ const PostThumbnail = ({ post }: { post: Post }) => {
                 style={styles.image}
                 resizeMode="cover"
                 accessibilityLabel="Post thumbnail"
-                onLoadStart={() => {
-                    console.log("IMAGE LOAD START:", post.image);
-                    setIsLoading(true);
-                }}
-                onLoad={() => {
-                    console.log("IMAGE LOAD SUCCESS:", post.image);
-                    setIsLoading(false);
-                }}
-                onError={(error) => {
-                    console.log("IMAGE LOAD ERROR:", post.image, error.nativeEvent);
-                    setIsLoading(false);
-                }}
-                onLoadEnd={() => {
-                    console.log("IMAGE LOAD END:", post.image);
-                    setIsLoading(false);
-                }}
+                onLoad={() => setIsLoading(false)}
             />
         </TouchableOpacity>
     );

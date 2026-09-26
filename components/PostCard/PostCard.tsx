@@ -3,8 +3,9 @@ import PostHeader from "./PostHeader/PostHeader";
 import PostImage from "./PostImage/PostImage";
 import PostActions from "./PostActions/PostActions";
 import PostDescription from "./PostDescription/PostDescription";
+
+import { Text, View } from "react-native";
 import CommentsList from "./CommentList/CommentList";
-import { View } from "react-native";
 
 interface PostCardProps {
     post: Post;
@@ -34,14 +35,16 @@ const PostCard = ({ post, variant }: PostCardProps) => {
                 <View>
                     <PostActions postId={post.id} likes={post.likes} />
                 </View>
+                
 
                 <View>
                     <PostDescription post={post} variant={variant} />
                 </View>
-
-                <View>
+                
                     <CommentsList comments={post.comments} /> 
-                </View>
+                    <Text>Hola</Text>
+
+                
             </View>
         );
     }
@@ -64,6 +67,9 @@ const PostCard = ({ post, variant }: PostCardProps) => {
                 post={post}
                 variant={variant}
             />
+            <View>
+                    <CommentsList comments={post.comments} /> 
+                </View>
         </View>
     );
 }
